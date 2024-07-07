@@ -7,7 +7,7 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"User": {
+			"UserServicetype": {
 				"properties": {
 					"name": {
 						"type": "string"
@@ -23,7 +23,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"UserCreationParams": {
+			"UserServicePrams": {
 				"properties": {
 					"name": {
 						"type": "string"
@@ -56,7 +56,12 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/User"
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/UserServicetype"
+										}
+									],
+									"nullable": true
 								}
 							}
 						}
@@ -69,7 +74,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UserCreationParams"
+								"$ref": "#/components/schemas/UserServicePrams"
 							}
 						}
 					}
@@ -84,9 +89,10 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/User"
+										"$ref": "#/components/schemas/UserServicetype"
 									},
-									"type": "array"
+									"type": "array",
+									"nullable": true
 								}
 							}
 						}
@@ -107,7 +113,7 @@
 								"schema": {
 									"allOf": [
 										{
-											"$ref": "#/components/schemas/User"
+											"$ref": "#/components/schemas/UserServicetype"
 										}
 									],
 									"nullable": true
@@ -138,7 +144,7 @@
 								"schema": {
 									"allOf": [
 										{
-											"$ref": "#/components/schemas/User"
+											"$ref": "#/components/schemas/UserServicetype"
 										}
 									],
 									"nullable": true
@@ -163,7 +169,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UserCreationParams"
+								"$ref": "#/components/schemas/UserServicePrams"
 							}
 						}
 					}
@@ -179,7 +185,7 @@
 								"schema": {
 									"allOf": [
 										{
-											"$ref": "#/components/schemas/User"
+											"$ref": "#/components/schemas/UserServicetype"
 										}
 									],
 									"nullable": true

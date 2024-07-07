@@ -1,26 +1,27 @@
 // src/services/userService.ts
 
-import { User, UserModel, UserCreationParams } from "../Models/user";
+import { UserRepo } from "../user Repo/user.repo";
+import { UserServicePrams, UserServicetype } from "./type";
 
-export class UserService {
-    async getUserById(id: string): Promise<User | null> {
-        return UserModel.findById(id).exec();
+export class UserService extends UserRepo  {
+    async getUserById(id: string): Promise<UserServicetype | null> {
+        return this.getUserById(id)
     }
 
-    async getUsers(): Promise<User[]> {
-        return UserModel.find().exec();
+    async getUsers(): Promise<UserServicetype[]|null> {
+        return this.getUsers()
     }
 
-    async createUser(userCreationParams: UserCreationParams): Promise<User> {
-        const newUser = new UserModel(userCreationParams);
-        return newUser.save();
+    async createUser(userCreationParams: UserServicePrams): Promise<UserServicetype|null> {
+        const newUser = this.createUser(userCreationParams);
+        return newUser;
     }
 
-    async updateUser(id: string, userDetails: UserCreationParams): Promise<User | null> {
-        return UserModel.findByIdAndUpdate(id, userDetails, { new: true }).exec();
+    async updateUser(id: string, userDetails: UserServicePrams): Promise<UserServicetype | null> {
+        return this.updateUser(id,userDetails);
     }
 
-    async deleteUser(id: string): Promise<User | null> {
-        return UserModel.findByIdAndDelete(id).exec();
+    async deleteUser(id: string): Promise<UserServicetype | null> {
+        return this.deleteUser(id);
     }
 }
