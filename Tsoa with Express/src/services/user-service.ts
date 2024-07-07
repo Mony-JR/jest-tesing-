@@ -1,27 +1,28 @@
 // src/services/userService.ts
 
 import { UserRepo } from "../user Repo/user.repo";
-import { UserServicePrams, UserServicetype } from "./type";
+import { UserServicePrams } from "./type";
 
 export class UserService extends UserRepo  {
-    async getUserById(id: string): Promise<UserServicetype | null> {
-        return this.getUserById(id)
+    private useReop= new UserRepo();
+    async getUserById(id: string): Promise<any | null> {
+        return this.useReop.getUserById(id)
     }
 
-    async getUsers(): Promise<UserServicetype[]|null> {
-        return this.getUsers()
+    async getUsers(page?:number,limit?:number): Promise<any|null> {
+        return this.useReop.getUsers(page,limit)
     }
 
-    async createUser(userCreationParams: UserServicePrams): Promise<UserServicetype|null> {
+    async createUser(userCreationParams: UserServicePrams): Promise<any|null> {
         const newUser = this.createUser(userCreationParams);
         return newUser;
     }
 
-    async updateUser(id: string, userDetails: UserServicePrams): Promise<UserServicetype | null> {
-        return this.updateUser(id,userDetails);
+    async updateUser(id: string, userDetails: UserServicePrams): Promise<any | null> {
+        return this.useReop.updateUser(id,userDetails);
     }
 
-    async deleteUser(id: string): Promise<UserServicetype | null> {
-        return this.deleteUser(id);
+    async deleteUser(id: string): Promise<any | null> {
+        return this.useReop.deleteUser(id);
     }
 }

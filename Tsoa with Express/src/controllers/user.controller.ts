@@ -1,20 +1,18 @@
-// src/controllers/userController.ts
-import { Controller, Route, Post, Get, Body, Put, Path,Delete} from 'tsoa';
+import { Controller, Route, Post, Get, Body, Put, Path, Delete, Query } from 'tsoa';
 import { UserService } from '../services/user-service';
 import { UserServicePrams, UserServicetype } from '../services/type';
-
 
 @Route("/v1/users")
 export class UserController extends Controller {
     private userService: UserService = new UserService();
 
     @Post("/")
-    public async createNewUser(@Body() requestBody: UserServicePrams): Promise<UserServicetype |null> {
+    public async createNewUser(@Body() requestBody: UserServicePrams): Promise<UserServicetype | null> {
         return this.userService.createUser(requestBody);
     }
 
     @Get('/{id}')
-    public async getUserById(@Path('id') id: string): Promise<UserServicetype | null> {
+    public async getUserById(@Path('id') id: string): Promise<any | null> {
         return this.userService.getUserById(id);
     }
 
@@ -24,8 +22,11 @@ export class UserController extends Controller {
     }
 
     @Get("/")
-    public async getUsers(): Promise<UserServicetype[]|null> {
-        return this.userService.getUsers();
+    public async getUsers(
+        @Query('page') page?: number,
+        @Query('limit') limit?: number
+    ): Promise<UserServicetype[] | null> {
+        return this.userService.getUsers(page, limit);
     }
 
     @Delete("/{id}")

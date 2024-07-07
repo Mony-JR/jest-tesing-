@@ -7,11 +7,17 @@ export class UserRepo {
         return UserModel.findById(id).exec();
     }
 
-    async getUsers(): Promise<User[] |null> {
-        return UserModel.find().exec();
+    async getUsers(page?: number, limit?: number): Promise<User[] | null> {
+        if (page !== undefined && limit !== undefined) {
+            const skip = (page - 1) * limit;
+            return await UserModel.find().skip(skip).limit(limit).exec();
+        } else {
+            return await UserModel.find().exec();
+        }
+
     }
 
-    async createUser(userCreationParams: UserCreationParams): Promise<User |null> {
+    async createUser(userCreationParams: UserCreationParams): Promise<User | null> {
         const newUser = new UserModel(userCreationParams);
         return newUser.save();
     }
