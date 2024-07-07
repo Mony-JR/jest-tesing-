@@ -7,13 +7,32 @@ export class UserRepo {
         return UserModel.findById(id).exec();
     }
 
-    async getUsers(page?: number, limit?: number): Promise<User[] | null> {
-        if (page !== undefined && limit !== undefined) {
-            const skip = (page - 1) * limit;
-            return await UserModel.find().skip(skip).limit(limit).exec();
+    async getUsers(page?: number, limit?: number, ageMin?: number, ageMax?: number): Promise<User[] | null> {
+
+        console.log("AGE ===== ", ageMax)
+
+        if (page) {
+            console.log(page);
+
+            if (page !== undefined && limit !== undefined) {
+                const skip = (page - 1) * limit;
+                return await UserModel.find().skip(skip).limit(limit).exec();
+            } else if (page === undefined && limit === undefined) {
+                return await UserModel.find().exec();
+            }
+        } if (ageMin) {
+            console.log("AGE ===== ", ageMin)
+            if (ageMin !== undefined && ageMax !== undefined) {
+                return await UserModel.find({ age: { $gte: ageMin, $lte: ageMax } }).exec();
+
+            } else {
+                console.log("E LSE");
+                return await UserModel.find().exec();
+            }
         } else {
             return await UserModel.find().exec();
         }
+
 
     }
 

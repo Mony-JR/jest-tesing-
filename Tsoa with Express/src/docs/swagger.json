@@ -117,6 +117,24 @@
 							"format": "double",
 							"type": "number"
 						}
+					},
+					{
+						"in": "query",
+						"name": "ageMin",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "ageMax",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
 					}
 				]
 			}

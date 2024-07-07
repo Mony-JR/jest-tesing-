@@ -24,9 +24,11 @@ export class UserController extends Controller {
     @Get("/")
     public async getUsers(
         @Query('page') page?: number,
-        @Query('limit') limit?: number
+        @Query('limit') limit?: number,
+        @Query('ageMin') ageMin?: number,
+        @Query('ageMax') ageMax?: number
     ): Promise<UserServicetype[] | null> {
-        return this.userService.getUsers(page, limit);
+        return this.userService.getUsers(page, limit,ageMin,ageMax)
     }
 
     @Delete("/{id}")
