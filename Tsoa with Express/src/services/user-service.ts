@@ -14,7 +14,7 @@ export class UserService extends UserRepo  {
     }
 
     async createUser(userCreationParams: UserServicePrams): Promise<any|null> {
-        const newUser = this.createUser(userCreationParams);
+        const newUser = this.useReop.createUser(userCreationParams);
         return newUser;
     }
 

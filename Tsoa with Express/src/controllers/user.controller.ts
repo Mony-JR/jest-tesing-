@@ -12,7 +12,7 @@ export class UserController extends Controller {
     }
 
     @Get('/{id}')
-    public async getUserById(@Path('id') id: string): Promise<any | null> {
+    public async getUserById(@Path('id') id: string): Promise<UserServicePrams | null> {
         return this.userService.getUserById(id);
     }
 
@@ -34,5 +34,9 @@ export class UserController extends Controller {
     @Delete("/{id}")
     public async deleteUser(@Path('id') id: string): Promise<UserServicetype | null> {
         return this.userService.deleteUser(id);
+    }
+    @Get("/hello/jest")
+    public helloJest(): string {
+        return "Hello Jest";
     }
 }
