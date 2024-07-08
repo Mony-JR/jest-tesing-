@@ -4,14 +4,18 @@ import request from 'supertest';
 import { TestUser, TestUserModel } from '../Models/testUser';
 
 describe('TestController Tests', () => {
+
+    let getID:string 
   beforeAll(async () => {
 
-    await mongoose.connect('mongodb+srv://mony:8tuL6c4irbVNCYdg@cluster0.7r2ktrw.mongodb.net/Bookstore')
+    await mongoose.connect('mongodb+srv://mony:8tuL6c4irbVNCYdg@cluster0.7r2ktrw.mongodb.net/testjest')
     console.log("Successfully connected to MongoDB");
 
   });
 
   afterAll(async () => {
+    await request(app).delete(`/v1/users/${getID}`)
+    console.log("User deleted successfully");
     await mongoose.connection.close(); // Close the database connection after all tests
   });
 
@@ -75,8 +79,8 @@ describe('TestController Tests', () => {
 
       // Assert the response body matches the created user data
       expect(response.body).toMatchObject(newUser);
+      getID = response.body._id; // Store the ID for further tests
   });
-
 
 
 

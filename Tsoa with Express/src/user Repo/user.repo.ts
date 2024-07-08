@@ -7,7 +7,7 @@ export class UserRepo {
         return UserModel.findById(id).exec();
     }
 
-    async getUsers(page?: number, limit?: number, ageMin?: number, ageMax?: number): Promise<User[] | null> {
+    async getUsers(page?: number, limit?: number, ageMin?: number, ageMax?: number,nameUser?:string): Promise<User[] | null> {
 
         console.log("AGE ===== ", ageMax)
 
@@ -29,7 +29,16 @@ export class UserRepo {
                 console.log("E LSE");
                 return await UserModel.find().exec();
             }
-        } else {
+        } 
+
+        if(nameUser){
+            if(nameUser!==undefined){
+                return await UserModel.find({ name: new RegExp(nameUser, "i") }).exec();
+            }
+            else{
+                return await UserModel.find().exec();
+            }
+        }else {
             return await UserModel.find().exec();
         }
 

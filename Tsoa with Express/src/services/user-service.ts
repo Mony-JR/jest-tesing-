@@ -9,8 +9,8 @@ export class UserService extends UserRepo  {
         return this.useReop.getUserById(id)
     }
 
-    async getUsers(page?:number,limit?:number,ageMin?:number,ageMax?:number): Promise<any|null> {
-        return this.useReop.getUsers(page,limit,ageMin,ageMax)
+    async getUsers(page?:number,limit?:number,ageMin?:number,ageMax?:number,nameUser?:string): Promise<any|null> {
+        return this.useReop.getUsers(page,limit,ageMin,ageMax,nameUser)
     }
 
     async createUser(userCreationParams: UserServicePrams): Promise<any|null> {

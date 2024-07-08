@@ -13,4 +13,4 @@ const testUserSchema = new Schema<TestUser>({
   age: { type: Number, required:true}, // Optional age field in the schema
 });
 
-export const TestUserModel = models.User || model<TestUser>('User', testUserSchema);
+export const TestUserModel = models.User || model<TestUser>('testuser', testUserSchema);
