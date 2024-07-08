@@ -13,7 +13,18 @@ esbuild.build({
   platform: 'node',
   target: 'node20',  // Target depends on your environment
   outdir: 'build',
-  external: ['express'],  // Specify Node.js packages here
+  external: [
+    'express',
+    'mongoose',
+    'swagger-ui-express',
+    'dotenv',
+    'yup',
+    '@tsoa/runtime',
+    'tsoa'
+  ],  // Mark Node.js packages as external
+  loader: {
+    '.ts': 'ts',
+  },  // Specify Node.js packages here
   loader: {
     '.ts': 'ts',
   },
