@@ -7,7 +7,7 @@ export class UserRepo {
         return UserModel.findById(id).exec();
     }
 
-    async getUsers(page?: number, limit?: number, ageMin?: number, ageMax?: number,nameUser?:string): Promise<User[] | null> {
+    async getUsers(page?: number, limit?: number, ageMin?: number, ageMax?: number,nameUser?:string,sort?:string): Promise<User[] | null> {
 
         console.log("AGE ===== ", ageMax)
 
@@ -30,6 +30,15 @@ export class UserRepo {
                 return await UserModel.find().exec();
             }
         } 
+        if(sort){
+            if(sort === "a-z"){
+                return await UserModel.find().sort({name:1}).exec();
+            }else if(sort === "z-a"){
+                return await UserModel.find().sort({name:-1}).exec();
+            }else{
+                return await UserModel.find().exec();
+            }
+        }
 
         if(nameUser){
             if(nameUser!==undefined){
