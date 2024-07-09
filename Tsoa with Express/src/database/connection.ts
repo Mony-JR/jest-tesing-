@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 const connectDB = async () => {
     try {
         // await mongoose.connect(configs.mongodbUrl || '');
-        await mongoose.connect('mongodb+srv://mony:8tuL6c4irbVNCYdg@cluster0.7r2ktrw.mongodb.net/testjest');
+        await mongoose.connect('mongodb+srv://mony:8tuL6c4irbVNCYdg@cluster0.7r2ktrw.mongodb.net/Bookstore');
         console.log('MongoDB connected...');
     } catch (err) {
         console.log("failed to connect");

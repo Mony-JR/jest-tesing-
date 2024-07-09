@@ -39,6 +39,6 @@ export class UserController extends Controller {
     }
     @Get("/hello/jest")
     public helloJest(): string {
-        return "Hello Jest";
+        return "Hello Jest Deloy v2";
     }
 }

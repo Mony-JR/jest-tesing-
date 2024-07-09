@@ -93,3 +93,4 @@ development
 .env
 
 yarn.lock
+.vercel
