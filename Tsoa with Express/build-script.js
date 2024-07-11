@@ -33,9 +33,9 @@ esbuild.build({
     copy({
       assets: {
         from: [
-          '../../../node_modules/swagger-ui-dist/*.css',
-          '../../../node_modules/swagger-ui-dist/*.js',
-          '../../../node_modules/swagger-ui-dist/*.png'
+          'node_modules/swagger-ui-dist/*.css',
+          'node_modules/swagger-ui-dist/*.js',
+          'node_modules/swagger-ui-dist/*.png'
         ],
         to: ['./']
       }
@@ -51,6 +51,8 @@ esbuild.build({
 }).then(() => {
   // (1) Solve: Copy swagger.json after successful build
   fs.copySync(path.resolve(__dirname, 'src/docs/swagger.json'), path.resolve(__dirname, 'build/docs/swagger.json'));
+  fs.copySync(path.resolve(__dirname, 'src/configs/.env.production'), path.resolve(__dirname, 'build/configs/.env.production'));
+
   console.log('Swagger JSON copied successfully!');
 }).catch(error => {
   console.error('Build failed:', error);
