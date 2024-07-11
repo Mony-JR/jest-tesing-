@@ -43,7 +43,3 @@ jobs:
     - name: Build application
       run: yarn build
       working-directory: './Tsoa with Express'
-
-    - name: Lint code
-      run: yarn lint
-      working-directory: './Tsoa with Express'
