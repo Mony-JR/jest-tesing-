@@ -28,10 +28,6 @@ jobs:
       run: yarn install
       working-directory: './Tsoa with Express'
 
-    - name: Install ESLint
-      run: yarn add eslint --dev
-      working-directory: './Tsoa with Express'
-
     - name: Generate TSOA routes and spec
       run: yarn tsoa:gen
       working-directory: './Tsoa with Express'
