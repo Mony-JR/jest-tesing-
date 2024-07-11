@@ -26,20 +26,20 @@ jobs:
 
     - name: Install dependencies
       run: yarn install
-      working-directory: ./Tsoa\ with\ Express
+      working-directory: './Tsoa with Express'
 
     - name: Generate TSOA routes and spec
       run: yarn tsoa:gen
-      working-directory: ./Tsoa\ with\ Express
+      working-directory: './Tsoa with Express'
 
     - name: Run tests
       run: yarn test
-      working-directory: ./Tsoa\ with\ Express
+      working-directory: './Tsoa with Express'
 
     - name: Build application
       run: yarn build
-      working-directory: ./Tsoa\ with\ Express
+      working-directory: './Tsoa with Express'
 
     - name: Lint code
       run: yarn lint
-      working-directory: ./Tsoa\ with\ Express
+      working-directory: './Tsoa with Express'
