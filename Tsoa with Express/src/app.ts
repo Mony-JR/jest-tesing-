@@ -26,7 +26,7 @@ RegisterRoutes(app)
 // ========================
 // API Documentations
 // ========================
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // ========================
 // ERROR Handler
