@@ -2,9 +2,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -56,16 +56,24 @@ jobs:
           name: build-artifact
           path: ./Tsoa with Express/build
 
+      - name: Verify Secrets
+        run: |
+          echo "SERVER_IP: ${{ secrets.SERVER_IP }}"
+          echo "SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}"
+          echo "SSH_KEY set: ${SSH_KEY_PROVIDED:-NOT SET}"
+        env:
+          SSH_KEY_PROVIDED: ${{ secrets.SSH_KEY }}
+
       - name: Prepare Deployment Directories
         uses: appleboy/ssh-action@master
         with:
-            host: ${{ secrets.SERVER_IP }}
-            username: ${{ secrets.SERVER_USERNAME }}
-            key: ${{ secrets.SSH_KEY }}
-            port: 22
-            script: |
-              mkdir -p /home/ubuntu/Project/API_Test/build
-              mkdir -p /ho
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            mkdir -p /home/ubuntu/Project/API_Test/build
+            mkdir -p /home/ubuntu/Project/API_Test/build/configs
 
       - name: Copy files to Server
         uses: appleboy/scp-action@master
