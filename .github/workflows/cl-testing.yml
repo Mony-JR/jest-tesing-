@@ -106,4 +106,3 @@ jobs:
             else
               echo "Application is not running. Starting..."
               pm2 start your-service-name
-            fi
