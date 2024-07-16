@@ -63,11 +63,9 @@ jobs:
             username: ${{ secrets.SERVER_USERNAME }}
             key: ${{ secrets.SSH_KEY }}
             port: 22
-            debug: true  # Enable debug mode
             script: |
               mkdir -p /home/ubuntu/Project/API_Test/build
-              mkdir -p /home/ubuntu/Project/API_Test/build/configs
-  
+              mkdir -p /ho
 
       - name: Copy files to Server
         uses: appleboy/scp-action@master
