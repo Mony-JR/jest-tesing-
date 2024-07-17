@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: build
-          path: ./Tsoa with Express
+          path: ./Tsoa with Express/build
 
       - name: Prepare Deployment Directories
         uses: appleboy/ssh-action@master # SSH into the server to prepare directories
