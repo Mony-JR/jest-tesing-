@@ -92,17 +92,19 @@ jobs:
             echo "NODE_ENV=production" > /home/ubuntu/Project/API_Test/build/.env
             echo "PORT=your_port_number" >> /home/ubuntu/Project/API_Test/build/config.env.production
             echo "DATABASE_URL=your_database_url" >> /home/ubuntu/Project/API_Test/build/.env
+            cd /home/ubuntu/Project/API_Test
+            pm2 start build/build/build/server.js --name "API_Test"
 
 
-      - name: Install Dependencies and Restart Application
-        uses: appleboy/ssh-action@master
-        with:
-            host: ${{ secrets.SEVER_IP }}
-            username: ${{ secrets.SEVER_USERNAME }}
-            key: ${{ secrets.SHH_KEY }}
-            port: 22
-            script: |
-              cd /home/ubuntu/Project/API_Test
+      # - name: Install Dependencies and Restart Application
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #       host: ${{ secrets.SEVER_IP }}
+      #       username: ${{ secrets.SEVER_USERNAME }}
+      #       key: ${{ secrets.SHH_KEY }}
+      #       port: 22
+      #       script: |
+      #         cd /home/ubuntu/Project/API_Test
               
-              pm2 start build/build/build/server.js --name "API_Test"
+      #         pm2 start build/build/build/server.js --name "API_Test"
 
