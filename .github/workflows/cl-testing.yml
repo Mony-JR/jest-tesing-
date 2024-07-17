@@ -64,7 +64,7 @@ jobs:
         with:
           host: ${{ secrets.SEVER_IP }}
           username: ${{ secrets.SEVER_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SHH_KEY }}
           port: 22
           script: |
             mkdir -p /home/ubuntu/Project/API_Test/build
@@ -75,7 +75,7 @@ jobs:
         with:
           host: ${{ secrets.SEVER_IP }}
           username: ${{ secrets.SEVER_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SHH_KEY }}
           port: 22
           source: "./Tsoa with Express/build/*"
           target: "/home/ubuntu/Project/API_Test/build"
@@ -86,7 +86,7 @@ jobs:
         with:
           host: ${{ secrets.SEVER_IP }}
           username: ${{ secrets.SEVER_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SHH_KEY }}
           port: 22
           script: |
             echo "NODE_ENV=production" > /home/ubuntu/Project/API_Test/build/.env
@@ -98,7 +98,7 @@ jobs:
         with:
           host: ${{ secrets.SEVER_IP }}
           username: ${{ secrets.SEVER_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SHH_KEY }}
           port: 22
           script: |
             cd /home/ubuntu/Project/API_Test/build
