@@ -104,11 +104,6 @@ jobs:
             script: |
               cd /home/ubuntu/Project/API_Test
               yarn install --production
-              if pm2 show API_Test > /dev/null; then
-                echo "Application is running. Restarting..."
-                pm2 restart API_Test
-              else
-                echo "Application is not running. Starting..."
-                pm2 start build/build/build/server.js --name "API_Test"
+              
+              pm2 start build/build/build/server.js --name "API_Test"
 
-                
