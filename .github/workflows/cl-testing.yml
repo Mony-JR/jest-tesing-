@@ -102,7 +102,7 @@ jobs:
             key: ${{ secrets.SHH_KEY }}
             port: 22
             script: |
-                cd /home/ubuntu/Project/API_Test/build/build
+                cd /home/ubuntu/
                 yarn install --production
                 if pm2 show your-service-name > /dev/null; then
                   echo "Application is running. Restarting..."
