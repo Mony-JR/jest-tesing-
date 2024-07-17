@@ -110,3 +110,5 @@ jobs:
               else
                 echo "Application is not running. Starting..."
                 pm2 start build/build/build/server.js --name "API_Test"
+
+                
