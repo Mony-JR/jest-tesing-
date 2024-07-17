@@ -97,7 +97,7 @@ jobs:
       - name: Install Dependencies and Restart Application
         uses: appleboy/ssh-action@master
         with:
-            host: 184.72.205.13
+            host: ${{secrets.SEVER_IP}}
             username: ${{ secrets.SEVER_USERNAME }}
             key: ${{ secrets.SHH_KEY }}
             port: 22
