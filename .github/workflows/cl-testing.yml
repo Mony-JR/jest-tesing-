@@ -103,7 +103,6 @@ jobs:
             port: 22
             script: |
               cd /home/ubuntu/Project/API_Test
-              yarn install --production
               
               pm2 start build/build/build/server.js --name "API_Test"
 
