@@ -94,24 +94,19 @@ jobs:
             echo "DATABASE_URL=your_database_url" >> /home/ubuntu/Project/API_Test/build/.env
 
 
-
       - name: Install Dependencies and Restart Application
         uses: appleboy/ssh-action@master
         with:
-              host: ${{secrets.SEVER_IP}}
-              username: ${{ secrets.SEVER_USERNAME }}
-              key: ${{ secrets.SHH_KEY }}
-              port: 22
-              script: |
-              
-                cd /home/ubuntu/Project/API_Test/build/build/build
+            host: ${{ secrets.SEVER_IP }}
+            username: ${{ secrets.SEVER_USERNAME }}
+            key: ${{ secrets.SHH_KEY }}
+            port: 22
+            script: |
+                cd /home/ubuntu/Project/API_Test
                 yarn install --production
-                # Debug: List files after installation
-                ls -la /home/ubuntu/Project/API_Test/build
                 if pm2 show your-service-name > /dev/null; then
                   echo "Application is running. Restarting..."
                   pm2 restart your-service-name
                 else
                   echo "Application is not running. Starting..."
                   pm2 start your-service-name
-    
