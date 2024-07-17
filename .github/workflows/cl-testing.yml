@@ -101,8 +101,23 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd /home/ubuntu/Project/API_Test/build/build
+            source /home/ubuntu/.nvm/nvm.sh
+            source /home/ubuntu/.profile
+            cd /home/ubuntu/apps/build
+
             yarn install --production
+
+            # Debug: List files after installation
+            ls -la
+
+            # Check if the PM2 process is running
+            if pm2 show your-service-name > /dev/null; then
+              echo "Application is running. Restarting..."
+              pm2 restart build/server.js --name "API_Test"
+            else
+              echo "Application is not running. Starting..."
+              pm2 start build/server.js --name "API_Test"
+            fi
             
             
-            pm2 start build/server.js --name "API_Test"
+            
