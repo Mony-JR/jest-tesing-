@@ -40,9 +40,9 @@ jobs:
         with:
           name: build-artifact
           path: |
-            ./Tsoa with Express/build
-            ./Tsoa with Express/package.json
-            ./Tsoa with Express/yarn.lock
+            ./build
+            ./package.json
+            ./yarn.lock
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
-          path: ./Tsoa with Express/build
+          path: ./Tsoa with Express
 
       - name: Prepare Deployment Directories
         uses: appleboy/ssh-action@master
@@ -67,8 +67,22 @@ jobs:
           key: ${{ secrets.SHH_KEY }}
           port: 22
           script: |
-            mkdir -p /home/ubuntu/Project/API_Test/build
-            mkdir -p /home/ubuntu/Project/API_Test/build/configs
+            mkdir -p /home/ubuntu/Project/API_Test
+
+      - name: Install Yarn on Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SEVER_IP }}
+          username: ${{ secrets.SEVER_USERNAME }}
+          key: ${{ secrets.SHH_KEY }}
+          port: 22
+          script: |
+            sudo apt update
+            sudo apt install -y curl
+            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+            echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+            sudo apt update && sudo apt install -y yarn
+            yarn --version # Verify yarn installation
 
       - name: Copy files to Server
         uses: appleboy/scp-action@master
@@ -77,8 +91,8 @@ jobs:
           username: ${{ secrets.SEVER_USERNAME }}
           key: ${{ secrets.SHH_KEY }}
           port: 22
-          source: "./Tsoa with Express/build/*"
-          target: "/home/ubuntu/Project/API_Test/build"
+          source: "./Tsoa with Express/*"
+          target: "/home/ubuntu/Project/API_Test"
           strip_components: 1
 
       - name: Create .env File
@@ -89,10 +103,9 @@ jobs:
           key: ${{ secrets.SHH_KEY }}
           port: 22
           script: |
-            echo "NODE_ENV=production" > /home/ubuntu/Project/API_Test/build/.env
-            echo "PORT=your_port_number" >> /home/ubuntu/Project/API_Test/build/config.env.production
-            echo "DATABASE_URL=your_database_url" >> /home/ubuntu/Project/API_Test/build/.env
-
+            echo "NODE_ENV=production" > /home/ubuntu/Project/API_Test/.env
+            echo "PORT=your_port_number" >> /home/ubuntu/Project/API_Test/.env
+            echo "DATABASE_URL=your_database_url" >> /home/ubuntu/Project/API_Test/.env
 
       - name: Install Dependencies and Restart Application
         uses: appleboy/ssh-action@master
@@ -102,11 +115,11 @@ jobs:
             key: ${{ secrets.SHH_KEY }}
             port: 22
             script: |
-                cd /home/ubuntu/
+                cd /home/ubuntu/Project/API_Test
                 yarn install --production
-                if pm2 show your-service-name > /dev/null; then
+                if pm2 show API_Test > /dev/null; then
                   echo "Application is running. Restarting..."
-                  pm2 restart Project/API_Test/build/build/build/server.js --name "API_Test"
+                  pm2 restart API_Test
                 else
                   echo "Application is not running. Starting..."
-                  pm2 start Project/API_Test/build/build/build/server.js --name "API_Test"
+                  pm2 start build/build/build/server.js --name "API_Test"
