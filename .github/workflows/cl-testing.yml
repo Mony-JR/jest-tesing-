@@ -90,7 +90,7 @@ jobs:
           port: 22
           script: |
             echo "NODE_ENV=production" > /home/ubuntu/Project/API_Test/build/.env
-            echo "PORT=your_port_number" >> /home/ubuntu/Project/API_Test/build/configs/.env.production
+            echo "PORT=your_port_number" >> /home/ubuntu/Project/API_Test/build/.env
             echo "DATABASE_URL=your_database_url" >> /home/ubuntu/Project/API_Test/build/.env
 
 
