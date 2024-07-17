@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
 
@@ -36,13 +36,13 @@ jobs:
         run: yarn test
 
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifact
-          path: ./Tsoa with Express |
-            ./build
-            ./package.json
-            ./yarn.lock
+          path: |
+            ./Tsoa with Express/build
+            ./Tsoa with Express/package.json
+            ./Tsoa with Express/yarn.lock
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,23 +51,23 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: build
+          name: build-artifact
           path: ./Tsoa with Express/build
 
       - name: Prepare Deployment Directories
-        uses: appleboy/ssh-action@master # SSH into the server to prepare directories
+        uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_IP }} # Server IP address from secrets
-          username: ${{ secrets.SERVER_USERNAME }} # Server username from secrets
-          key: ${{ secrets.SSH_KEY }} # SSH private key from secrets
-          port: 22 # SSH port, usually 22
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
           script: |
-            mkdir -p /home/ubuntu/Project/API_Test/build # Change to match your desire directory structure
+            mkdir -p /home/ubuntu/Project/API_Test/build
             mkdir -p /home/ubuntu/Project/API_Test/build/configs
 
       - name: Copy files to Server
