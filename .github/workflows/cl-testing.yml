@@ -101,9 +101,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            # source /home/ubuntu/.nvm/nvm.sh
-            # source /home/ubuntu/.profile
-            source  /home/ubuntu/Project/API_Test/build/build
+            source /home/ubuntu/.nvm/nvm.sh
+            source /home/ubuntu/.profile
+            cd /home/ubuntu/Project/API_Test/build/build
 
             yarn install --production
 
@@ -118,9 +118,6 @@ jobs:
               echo "Application is not running. Starting..."
               pm2 start build/server.js --name "API_Test"
             fi
-
-
-            
             
             
             
