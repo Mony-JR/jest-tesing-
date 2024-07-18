@@ -103,7 +103,7 @@ jobs:
           script: |
             # source /home/ubuntu/.nvm/nvm.sh
             # source /home/ubuntu/.profile
-            cd /home/ubuntu/Project/API_Test/build/build
+            source  /home/ubuntu/Project/API_Test/build/build
 
             yarn install --production
 
